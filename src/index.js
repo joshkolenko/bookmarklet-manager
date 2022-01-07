@@ -7,6 +7,7 @@ bookmarkletApp.id = 'bookmarklet-container-root';
 
 document.body.append(bookmarkletApp);
 
-ReactDOM.render(<BookmarkletApp />, document.querySelector('body'));
-
-bookmarkletApp.remove();
+ReactDOM.render(
+  <BookmarkletApp />,
+  document.querySelector('#bookmarklet-container-root')
+);

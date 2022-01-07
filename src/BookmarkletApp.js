@@ -1,15 +1,37 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createStitches, globalCss } from '@stitches/react';
 
-export default function BookmarkletApp() {
-  const divStyle = {
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Lato:400,700,900', 'sans-serif'],
+  },
+});
+
+const { styled } = createStitches({
+  theme: {
+    fonts: {
+      lato: ['Lato', 'sans-serif'],
+    },
+  },
+});
+
+const globalStyles = globalCss({
+  '#bookmarklet-container-root': {
     position: 'fixed',
     top: '20px',
     right: '20px',
-  };
+    zIndex: '10000',
+  },
+});
 
-  return ReactDOM.createPortal(
-    <div style={divStyle}>Bookmarklet App</div>,
-    document.querySelector('body')
-  );
+export default function BookmarkletApp() {
+  globalStyles();
+
+  const App = styled('div', {
+    fontFamily: '$lato',
+  });
+
+  return <App>Bookmarklet App</App>;
 }
