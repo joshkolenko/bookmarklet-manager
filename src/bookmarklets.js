@@ -1,4 +1,4 @@
-const bookmarklets = [
+export const bookmarklets = [
   {
     name: 'Bookmarklet 1',
     script: () => {

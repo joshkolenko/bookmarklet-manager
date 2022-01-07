@@ -1,21 +1,16 @@
 import React from 'react';
-import { createStitches, globalCss } from '@stitches/react';
+import { bookmarklets } from './bookmarklets';
+import Bookmarklet from './Bookmarklet';
 
 import WebFont from 'webfontloader';
-
 WebFont.load({
   google: {
     families: ['Lato:400,700,900', 'sans-serif'],
   },
 });
 
-const { styled } = createStitches({
-  theme: {
-    fonts: {
-      lato: ['Lato', 'sans-serif'],
-    },
-  },
-});
+import { globalCss } from '@stitches/react';
+import { styled } from './styled';
 
 const globalStyles = globalCss({
   '#bookmarklet-container-root': {
@@ -30,8 +25,20 @@ export default function BookmarkletApp() {
   globalStyles();
 
   const App = styled('div', {
-    fontFamily: '$lato',
+    '*': {
+      fontFamily: '$lato',
+    },
+    backgroundColor: '$blue4',
+    border: '1px solid $blue6',
+    borderRadius: '4px',
+    padding: '20px',
   });
 
-  return <App>Bookmarklet App</App>;
+  const renderedBookmarklets = bookmarklets.map((bm) => (
+    <Bookmarklet key={bm.name} script={bm.script}>
+      {bm.name}
+    </Bookmarklet>
+  ));
+
+  return <App>{renderedBookmarklets}</App>;
 }
