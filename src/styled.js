@@ -1,21 +1,14 @@
 import { createStitches } from '@stitches/react';
-import {
-  gray,
-  blue,
-  red,
-  green,
-  grayDark,
-  blueDark,
-  redDark,
-  greenDark,
-} from '@radix-ui/colors';
+import { gray, violet, grayA } from '@radix-ui/colors';
+
+console.log(violet);
 
 export const { styled } = createStitches({
   theme: {
     colors: {
       ...gray,
-      ...blue,
-      ...blueDark,
+      ...grayA,
+      ...violet,
     },
     fonts: {
       lato: ['Lato', 'sans-serif'],
