@@ -24513,8 +24513,7 @@ const { styled  } = _react.createStitches({
     theme: {
         colors: {
             ..._colors.gray,
-            ..._colors.blue,
-            ..._colors.blueDark
+            ..._colors.blue
         },
         fonts: {
             lato: [
