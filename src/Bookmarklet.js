@@ -20,7 +20,9 @@ export default function Bookmarklet({ script, children }) {
   const StyledButton = styled('button', {
     padding: '10px 20px',
     fontWeight: 700,
-    fontSize: '14px',
+    fontSize: '12px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
     backgroundColor: '$violet9',
     color: 'white',
     border: 'none',

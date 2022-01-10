@@ -1,8 +1,109 @@
 export const bookmarklets = [
   {
-    name: 'Bookmarklet 1',
+    name: 'Raise Fields',
     script: () => {
-      console.log('Bookmarklet 1 Test');
+      overlayId = 'bg-overlay';
+      stylesheetID = 'fieldPopperStylesheet';
+      if (document.getElementById(stylesheetID)) {
+        var stylesheet = document.getElementById(stylesheetID);
+        var bgOverlay = document.getElementById(overlayId);
+        [stylesheet, bgOverlay].forEach((element) => {
+          element.remove();
+        });
+        return;
+      }
+      var formFieldFontFamily = 'monospace';
+      var formFieldFontSize = '12px';
+      var buttonFontSize = '20px';
+      var formElementOutline = 'solid 2px #000';
+      var gutterWidth = '20px';
+      var formFieldTop = '200px';
+      var formFieldHeight = '600px';
+      var buttonHeight = '40px';
+      var bgOverlay = document.createElement('div');
+      bgOverlay.setAttribute('id', overlayId);
+      var stylesheet = document.createElement('style');
+      stylesheet.setAttribute('id', stylesheetID);
+      stylesheet.innerHTML =
+        '#MetabdMjYiaagYS0saaac9wbF0Nivp,' +
+        '#Metacd5BgiaagYboUaaada6fs3Q7Tq,' +
+        'button[name="apply"]' +
+        '{' +
+        'position: absolute;' +
+        'z-index: 20;' +
+        'outline: ' +
+        formElementOutline +
+        ';' +
+        '}' +
+        '#MetabdMjYiaagYS0saaac9wbF0Nivp,' +
+        '#Metacd5BgiaagYboUaaada6fs3Q7Tq' +
+        '{' +
+        'top: ' +
+        formFieldTop +
+        ';' +
+        'height: ' +
+        formFieldHeight +
+        ';' +
+        'width: calc((100% - (' +
+        gutterWidth +
+        ' * 3)) / 2);' +
+        'font-family: ' +
+        formFieldFontFamily +
+        ';' +
+        'font-size: ' +
+        formFieldFontSize +
+        ';' +
+        '}' +
+        '#MetabdMjYiaagYS0saaac9wbF0Nivp {' +
+        'left: ' +
+        gutterWidth +
+        ';' +
+        '}' +
+        '#Metacd5BgiaagYboUaaada6fs3Q7Tq {' +
+        'right: ' +
+        gutterWidth +
+        ';' +
+        '}' +
+        'button[name="apply"] {' +
+        'left: ' +
+        gutterWidth +
+        ';' +
+        'top: calc(' +
+        formFieldTop +
+        ' + ' +
+        formFieldHeight +
+        ' + ' +
+        gutterWidth +
+        ');' +
+        'width: calc(100% - (' +
+        gutterWidth +
+        ' * 2));' +
+        'font-size: ' +
+        buttonFontSize +
+        ';' +
+        'height: 3em;' +
+        '}' +
+        '#bg-overlay {' +
+        'position: absolute;' +
+        'z-index: 10;' +
+        'top: ' +
+        formFieldTop +
+        ';' +
+        'left: 0; right: 0; bottom: 0;' +
+        'background: #fff;' +
+        '}';
+      document.head.appendChild(stylesheet);
+      document.body.appendChild(bgOverlay);
+      document.getElementById(
+        'MetabdMjYiaagYS0saaac9wbF0Nivp'
+      ).onfocus = function () {
+        this.select();
+      };
+      document.getElementById(
+        'Metacd5BgiaagYboUaaada6fs3Q7Tq'
+      ).onfocus = function () {
+        this.select();
+      };
     },
   },
   {

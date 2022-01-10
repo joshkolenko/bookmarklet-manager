@@ -1,7 +1,7 @@
 {
   "scripts": {
     "clean": "rimraf dist",
-    "build": "parcel build",
+    "build": "npm run clean; parcel build",
     "start": "parcel"
   },
   "dependencies": {
