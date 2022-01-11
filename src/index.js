@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 
 const bookmarkletApp = document.createElement('div');
-bookmarkletApp.id = 'bookmarklet-container-root';
+bookmarkletApp.id = 'bookmarklet-manager';
 
 const fontAwesome = document.createElement('link');
 fontAwesome.rel = 'stylesheet';
@@ -14,4 +14,4 @@ fontAwesome.crossOrigin = 'anonymous';
 
 document.body.append(fontAwesome, bookmarkletApp);
 
-ReactDOM.render(<App />, document.querySelector('#bookmarklet-container-root'));
+ReactDOM.render(<App />, document.querySelector('#bookmarklet-manager'));
