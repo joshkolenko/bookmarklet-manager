@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BookmarkletApp from './BookmarkletApp';
+import App from './components/App';
 
 const bookmarkletApp = document.createElement('div');
 bookmarkletApp.id = 'bookmarklet-container-root';
 
-document.body.append(bookmarkletApp);
+const fontAwesome = document.createElement('link');
+fontAwesome.rel = 'stylesheet';
+fontAwesome.href = 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css';
+fontAwesome.integrity =
+  'sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p';
+fontAwesome.crossOrigin = 'anonymous';
 
-ReactDOM.render(
-  <BookmarkletApp />,
-  document.querySelector('#bookmarklet-container-root')
-);
+document.body.append(fontAwesome, bookmarkletApp);
+
+ReactDOM.render(<App />, document.querySelector('#bookmarklet-container-root'));

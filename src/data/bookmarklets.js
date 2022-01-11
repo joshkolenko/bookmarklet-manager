@@ -1,5 +1,6 @@
 export const bookmarklets = [
   {
+    id: 0,
     name: 'Raise Fields',
     script: () => {
       overlayId = 'bg-overlay';
@@ -107,42 +108,49 @@ export const bookmarklets = [
     },
   },
   {
+    id: 1,
     name: 'Bookmarklet 2',
     script: () => {
       console.log('Bookmarklet 2 Test');
     },
   },
   {
+    id: 2,
     name: 'Bookmarklet 3',
     script: () => {
       console.log('Bookmarklet 3 Test');
     },
   },
   {
+    id: 3,
     name: 'Bookmarklet 4',
     script: () => {
       console.log('Bookmarklet 4 Test');
     },
   },
   {
+    id: 4,
     name: 'Bookmarklet 5',
     script: () => {
       console.log('Bookmarklet 5 Test');
     },
   },
   {
+    id: 5,
     name: 'Bookmarklet 6',
     script: () => {
       console.log('Bookmarklet 6 Test');
     },
   },
   {
+    id: 6,
     name: 'Bookmarklet 7',
     script: () => {
       console.log('Bookmarklet 7 Test');
     },
   },
   {
+    id: 7,
     name: 'Bookmarklet 8',
     script: () => {
       console.log('Bookmarklet 8 Test');
