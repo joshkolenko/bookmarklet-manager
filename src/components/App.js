@@ -14,14 +14,14 @@ import {
 import Search from './Search';
 
 const globalStyles = globalCss({
-  '#bookmarklet-container-root': {
+  '#bookmarklet-manager': {
     position: 'fixed',
     top: '20px',
     right: '20px',
     zIndex: '10000',
   },
 
-  '#bookmarklet-container-root *:not(.fas)': {
+  '#bookmarklet-manager *:not(.fas)': {
     fontFamily: '$lato',
     boxSizing: 'border-box',
   },
