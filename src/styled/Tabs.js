@@ -4,10 +4,13 @@ import { styled } from './styled';
 const StyledTabs = styled(Tabs.Root, {
   display: 'flex',
   flexDirection: 'column',
-  height: 450,
+  height: 550,
+  width: 350,
 });
 
-const StyledTabsList = styled(Tabs.List, {});
+const StyledTabsList = styled(Tabs.List, {
+  display: 'flex',
+});
 
 const StyledTabsTrigger = styled(Tabs.Trigger, {
   display: 'inline-flex',
@@ -19,17 +22,17 @@ const StyledTabsTrigger = styled(Tabs.Trigger, {
   border: 'none',
   background: '$background',
   color: '$onBackground',
-  border: '1px solid transparent',
   borderBottom: '1px solid $primary',
   borderTop: 'none',
   height: '100%',
+  flex: 1,
 
   '&:hover': {
     backgroundColor: '$backgroundActive',
   },
 
   '&:focus, &:focus-visible': {
-    border: '1px solid $primary',
+    outline: '1px solid $primary',
     borderTop: 'none',
     outline: 'none',
   },
@@ -45,7 +48,6 @@ const StyledTabsTrigger = styled(Tabs.Trigger, {
   },
 
   '&:last-of-type': {
-    borderRadius: '0 6px 0 0',
     padding: '$1 $2',
     fontSize: '18px',
   },

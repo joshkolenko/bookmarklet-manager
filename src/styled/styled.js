@@ -19,7 +19,7 @@ export const { styled } = createStitches({
       secondary: cyanDark.cyan11,
       onBackground: mauveDark.mauve11,
       onSurface: mauveDark.mauve8,
-      onPrimary: violetDark.violet6,
+      onPrimary: violetDark.violet5,
       onSecondary: cyanDark.cyan6,
     },
     space: {

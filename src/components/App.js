@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Bookmarklets from './Bookmarklets';
 import { bookmarklets } from '../data/bookmarklets';
+import Bookmarklets from './Bookmarklets';
+import Search from './Search';
 
 import { globalCss } from '@stitches/react';
+import { styled } from '../styled/styled';
 import {
   TabsRoot,
   TabsList,
@@ -11,23 +13,10 @@ import {
   TabsContent,
   TabsHeader,
 } from '../styled/Tabs';
-import Search from './Search';
-
-const globalStyles = globalCss({
-  '#bookmarklet-manager': {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    zIndex: '10000',
-  },
-
-  '#bookmarklet-manager *:not(.fas)': {
-    fontFamily: '$lato',
-    boxSizing: 'border-box',
-  },
-});
 
 export default function App() {
+  const [isActive, setIsActive] = useState(false);
+
   const storage = window.localStorage;
 
   const getFavorites = () => {
@@ -50,10 +39,72 @@ export default function App() {
     setFavorites(getFavorites());
   };
 
+  const Toggle = styled('button', {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '50%',
+    left: -35,
+    transform: 'translateY(-50%)',
+    height: 70,
+    width: 35,
+    background: '$primaryA',
+    color: '$primary',
+    border: 'none',
+    borderRadius: '6px 0 0 6px',
+    fontSize: '24px',
+    cursor: 'pointer',
+  });
+
+  const globalStyles = globalCss({
+    '#bookmarklet-manager': {
+      position: 'fixed',
+      top: '10%',
+      right: -350,
+      zIndex: 10000,
+      transition: 'transform 300ms ease',
+    },
+
+    '.bookmark-manager-toggle': {
+      i: {
+        transition: 'transform 300ms',
+        width: 10,
+      },
+    },
+
+    '#bookmarklet-manager.active': {
+      transform: 'translateX(-350px)',
+
+      '.bookmark-manager-toggle': {
+        i: {
+          transform: 'rotate(180deg)',
+        },
+      },
+    },
+
+    '#bookmarklet-manager *:not(.fas)': {
+      fontFamily: '$lato',
+      boxSizing: 'border-box',
+    },
+  });
+
+  useEffect(() => {
+    const root = document.querySelector('#bookmarklet-manager');
+
+    if (isActive) root.classList.add('active');
+    else root.classList.remove('active');
+  }, [isActive]);
+
   globalStyles();
 
   return (
-    <TabsRoot defaultValue="search">
+    <TabsRoot defaultValue="favorites">
+      <Toggle
+        onClick={() => setIsActive(!isActive)}
+        className="bookmark-manager-toggle">
+        <i className="fas fa-caret-left" />
+      </Toggle>
       <TabsList>
         <TabsTrigger value="favorites">Favorites</TabsTrigger>
         <TabsTrigger value="all">All</TabsTrigger>
