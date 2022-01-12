@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { bookmarklets } from '../data/bookmarklets';
 import Bookmarklets from './Bookmarklets';
 import Search from './Search';
+import GoTo from './GoTo';
 
 import { globalCss } from '@stitches/react';
 import { styled } from '../styled/styled';
@@ -15,8 +16,6 @@ import {
 } from '../styled/Tabs';
 
 export default function App() {
-  const [isActive, setIsActive] = useState(false);
-
   const storage = window.localStorage;
 
   const getFavorites = () => {
@@ -39,6 +38,46 @@ export default function App() {
     setFavorites(getFavorites());
   };
 
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const root = document.querySelector('#bookmarklet-manager');
+
+    if (isActive) root.classList.add('active');
+    else root.classList.remove('active');
+
+    root.querySelectorAll('button').forEach((button) => {
+      button.disabled = false;
+    });
+  }, [isActive]);
+
+  useEffect(() => {
+    const closeApp = (e) => {
+      const isAppClick = e.path.find((el) => el.id === 'bookmarklet-manager');
+
+      if (isAppClick) return;
+
+      setIsActive(false);
+    };
+
+    if (isActive) document.body.addEventListener('click', closeApp);
+    else document.body.removeEventListener('click', closeApp);
+
+    return () => document.body.removeEventListener('click', closeApp);
+  }, [isActive]);
+
+  useEffect(() => {
+    const handleHotKey = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'B') {
+        setIsActive(!isActive);
+      }
+    };
+
+    window.addEventListener('keyup', handleHotKey);
+
+    return () => window.removeEventListener('keyup', handleHotKey);
+  }, [isActive]);
+
   const Toggle = styled('button', {
     display: 'flex',
     justifyContent: 'center',
@@ -49,8 +88,8 @@ export default function App() {
     transform: 'translateY(-50%)',
     height: 70,
     width: 35,
-    background: '$primaryA',
-    color: '$primary',
+    background: '$primary',
+    color: '$onPrimary',
     border: 'none',
     borderRadius: '6px 0 0 6px',
     fontSize: '24px',
@@ -60,8 +99,8 @@ export default function App() {
   const globalStyles = globalCss({
     '#bookmarklet-manager': {
       position: 'fixed',
-      top: '10%',
-      right: -350,
+      top: '15%',
+      right: -400,
       zIndex: 10000,
       transition: 'transform 300ms ease',
     },
@@ -74,7 +113,7 @@ export default function App() {
     },
 
     '#bookmarklet-manager.active': {
-      transform: 'translateX(-350px)',
+      transform: 'translateX(-400px)',
 
       '.bookmark-manager-toggle': {
         i: {
@@ -89,51 +128,62 @@ export default function App() {
     },
   });
 
-  useEffect(() => {
-    const root = document.querySelector('#bookmarklet-manager');
-
-    if (isActive) root.classList.add('active');
-    else root.classList.remove('active');
-  }, [isActive]);
-
   globalStyles();
 
   return (
-    <TabsRoot defaultValue="favorites">
+    <TabsRoot defaultValue="bookmarklets">
       <Toggle
         onClick={() => setIsActive(!isActive)}
         className="bookmark-manager-toggle">
         <i className="fas fa-caret-left" />
       </Toggle>
       <TabsList>
-        <TabsTrigger value="favorites">Favorites</TabsTrigger>
-        <TabsTrigger value="all">All</TabsTrigger>
-        <TabsTrigger value="search">
-          <i className="fas fa-search" />
-        </TabsTrigger>
+        <TabsTrigger value="bookmarklets">Bookmarklets</TabsTrigger>
+        <TabsTrigger value="tools">Tools</TabsTrigger>
       </TabsList>
-      <TabsContent value="favorites">
-        <TabsHeader>Favorited bookmarklets</TabsHeader>
-        <Bookmarklets
-          bookmarklets={bookmarklets.filter((bm) =>
-            favorites.find((f) => f === bm.name)
-          )}
-          favorites={favorites}
-          handleFavorite={handleFavorite}
-          message="No favorited bookmarklets"
-        />
+      <TabsContent value="bookmarklets">
+        <TabsRoot defaultValue="favorites">
+          <TabsList>
+            <TabsTrigger value="favorites">Favorites</TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="search" className="icon-tab">
+              <i className="fas fa-search" />
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="favorites">
+            <TabsHeader>Favorited bookmarklets</TabsHeader>
+            <Bookmarklets
+              bookmarklets={bookmarklets.filter((bm) =>
+                favorites.find((f) => f === bm.name)
+              )}
+              favorites={favorites}
+              handleFavorite={handleFavorite}
+              message="No favorited bookmarklets"
+            />
+          </TabsContent>
+          <TabsContent value="all">
+            <TabsHeader>All bookmarklets</TabsHeader>
+            <Bookmarklets
+              bookmarklets={bookmarklets}
+              favorites={favorites}
+              handleFavorite={handleFavorite}
+              message="No bookmarklets found"
+            />
+          </TabsContent>
+          <TabsContent value="search">
+            <Search favorites={favorites} handleFavorite={handleFavorite} />
+          </TabsContent>
+        </TabsRoot>
       </TabsContent>
-      <TabsContent value="all">
-        <TabsHeader>All bookmarklets</TabsHeader>
-        <Bookmarklets
-          bookmarklets={bookmarklets}
-          favorites={favorites}
-          handleFavorite={handleFavorite}
-          message="No bookmarklets found"
-        />
-      </TabsContent>
-      <TabsContent value="search">
-        <Search favorites={favorites} handleFavorite={handleFavorite} />
+      <TabsContent value="tools">
+        <TabsRoot defaultValue="go-to">
+          <TabsList>
+            <TabsTrigger value="go-to">Go to</TabsTrigger>
+          </TabsList>
+          <TabsContent value="go-to">
+            <GoTo></GoTo>
+          </TabsContent>
+        </TabsRoot>
       </TabsContent>
     </TabsRoot>
   );

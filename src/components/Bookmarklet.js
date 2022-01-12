@@ -1,7 +1,14 @@
 import React from 'react';
 import { styled } from '../styled/styled';
+import SwitchRoot from '../styled/Switch';
 
-export default function Bookmarklet({ name, script, isFav, handleFavorite }) {
+export default function Bookmarklet({
+  name,
+  type,
+  script,
+  isFav,
+  handleFavorite,
+}) {
   const StyledBookmarklet = styled('div', {
     display: 'flex',
     alignItems: 'center',
@@ -13,46 +20,85 @@ export default function Bookmarklet({ name, script, isFav, handleFavorite }) {
     borderRadius: 4,
     marginBottom: '$5',
     border: '1px solid transparent',
-    cursor: 'pointer',
-
-    button: {
-      marginRight: '$5',
-    },
 
     '&.favorite': {
-      button: {
+      '.favorite-button': {
         color: '$primary !important',
       },
     },
+  });
+
+  const StyledIconButton = styled('button', {
+    all: 'unset',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 36,
+    height: 36,
+    fontSize: '$5',
+    cursor: 'pointer',
+    borderRadius: '100%',
+
+    '&.favorite-button': {
+      margin: '-8px 6px -8px -8px',
+      color: '$onSurface',
+    },
+
+    '&.settings-button': {
+      margin: '-8px 8px -8px auto',
+      color: '$onBackground',
+    },
 
     '&:hover': {
-      backgroundColor: '$primaryA',
-      border: '1px solid $onPrimary',
+      backgroundColor: '$onBackgroundA',
     },
   });
 
-  const StyledFavButton = styled('button', {
-    padding: 8,
-    margin: '-8px',
-    background: 'none',
-    border: 'none',
-    fontSize: '$5',
-    color: '$onSurface',
+  const StyledPlayButton = styled('button', {
+    all: 'unset',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$primary',
+    color: '$onPrimary',
+    height: 28,
+    width: 44,
+    fontSize: '$1',
+    fontWeight: '$3',
+    letterSpacing: 0.5,
+    borderRadius: 28,
     cursor: 'pointer',
   });
 
+  let renderedAction = <div />;
+
+  if (type === 'toggle') {
+    renderedAction = <SwitchRoot script={script} />;
+  }
+
+  if (type === 'button') {
+    renderedAction = (
+      <StyledPlayButton onClick={() => script()}>
+        <i className="fas fa-play" />
+      </StyledPlayButton>
+    );
+  }
+
   return (
-    <StyledBookmarklet
-      className={isFav ? 'favorite' : ''}
-      onClick={() => script()}>
-      <StyledFavButton
+    <StyledBookmarklet className={isFav ? 'favorite' : ''}>
+      <StyledIconButton
+        className="favorite-button"
         onClick={(e) => {
           e.stopPropagation();
           handleFavorite(name, isFav);
         }}>
         <i className="fas fa-star" />
-      </StyledFavButton>
+      </StyledIconButton>
       {name}
+      <StyledIconButton className="settings-button">
+        <i className="fas fa-cog" />
+      </StyledIconButton>
+      {renderedAction}
     </StyledBookmarklet>
   );
 }

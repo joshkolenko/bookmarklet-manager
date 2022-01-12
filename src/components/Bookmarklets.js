@@ -13,6 +13,7 @@ export default function Bookmarklets({
     <Bookmarklet
       key={bm.name}
       name={bm.name}
+      type={bm.type}
       script={bm.script}
       isFav={favorites.find((f) => f === bm.name)}
       handleFavorite={handleFavorite}

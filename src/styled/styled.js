@@ -1,5 +1,11 @@
 import { createStitches } from '@stitches/react';
-import { mauveDark, violetDark, violetDarkA, cyanDark } from '@radix-ui/colors';
+import {
+  mauveDark,
+  mauveDarkA,
+  violetDark,
+  violetDarkA,
+  cyanDark,
+} from '@radix-ui/colors';
 
 import WebFont from 'webfontloader';
 WebFont.load({
@@ -14,12 +20,14 @@ export const { styled } = createStitches({
       background: mauveDark.mauve2,
       backgroundActive: mauveDark.mauve3,
       surface: mauveDark.mauve4,
-      primary: violetDark.violet8,
-      primaryA: violetDarkA.violetA3,
+      primary: violetDark.violet9,
+      primaryA: violetDarkA.violetA4,
+      primaryA2: violetDarkA.violetA3,
       secondary: cyanDark.cyan11,
       onBackground: mauveDark.mauve11,
+      onBackgroundA: mauveDarkA.mauveA2,
       onSurface: mauveDark.mauve8,
-      onPrimary: violetDark.violet5,
+      onPrimary: violetDark.violet4,
       onSecondary: cyanDark.cyan6,
     },
     space: {

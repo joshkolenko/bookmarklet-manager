@@ -5,7 +5,7 @@ const StyledTabs = styled(Tabs.Root, {
   display: 'flex',
   flexDirection: 'column',
   height: 550,
-  width: 350,
+  width: 400,
 });
 
 const StyledTabsList = styled(Tabs.List, {
@@ -13,18 +13,19 @@ const StyledTabsList = styled(Tabs.List, {
 });
 
 const StyledTabsTrigger = styled(Tabs.Trigger, {
+  all: 'unset',
   display: 'inline-flex',
   justifyContent: 'center',
+  alignItems: 'center',
   fontSize: '$4',
   fontWeight: '$2',
   cursor: 'pointer',
-  padding: '$1 $4',
-  border: 'none',
+  padding: '0 $4',
   background: '$background',
   color: '$onBackground',
   borderBottom: '1px solid $primary',
   borderTop: 'none',
-  height: '100%',
+  height: 50,
   flex: 1,
 
   '&:hover': {
@@ -47,7 +48,7 @@ const StyledTabsTrigger = styled(Tabs.Trigger, {
     borderRadius: '6px 0 0 0',
   },
 
-  '&:last-of-type': {
+  '&.icon-tab': {
     padding: '$1 $2',
     fontSize: '18px',
   },
@@ -84,6 +85,7 @@ const StyledTabsHeader = styled('div', {
     borderRadius: 4,
     color: 'white',
     fontSize: '$3',
+    width: '100%',
 
     '&:focus': {
       outline: '2px solid $primaryA',
