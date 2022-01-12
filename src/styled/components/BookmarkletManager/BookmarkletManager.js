@@ -1,4 +1,4 @@
-import { styled } from '../styled';
+import { styled } from '../../styled';
 
 const StyledBookmarkletManager = styled('div', {
   position: 'absolute',
@@ -24,7 +24,7 @@ const StyledBookmarkletManager = styled('div', {
   },
 });
 
-export function BookmarkletManager({ className = [], children }) {
+export function BookmarkletManagerRoot({ className = [], children }) {
   return (
     <StyledBookmarkletManager className={className}>
       {children}

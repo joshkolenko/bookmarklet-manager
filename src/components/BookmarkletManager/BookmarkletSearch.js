@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { bookmarklets } from '../data/bookmarklets';
-import { TabsHeader } from '../styled/components/Tabs';
+import { bookmarklets } from '../../data/bookmarklets';
+import { TabsHeader } from '../../styled/components/Tabs';
 import Bookmarklets from './Bookmarklets';
 
-export default function Search({ favorites, handleFavorite }) {
+export default function BookmarkletSearch({ favorites, handleFavorite }) {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
 

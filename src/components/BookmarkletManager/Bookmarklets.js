@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollAreaRoot } from '../styled/components/ScrollArea';
+import { ScrollAreaRoot } from '../../styled/components/ScrollArea';
 import Bookmarklet from './Bookmarklet';
 
 export default function Bookmarklets({

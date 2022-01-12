@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as Switch from '@radix-ui/react-switch';
-import { styled } from '../styled';
+import { styled } from '../../styled';
 
 const StyledBookmarklet = styled('div', {
   display: 'flex',
