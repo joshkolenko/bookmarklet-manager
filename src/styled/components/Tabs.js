@@ -1,5 +1,5 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import { styled } from './styled';
+import { styled } from '../styled';
 
 const StyledTabs = styled(Tabs.Root, {
   display: 'flex',

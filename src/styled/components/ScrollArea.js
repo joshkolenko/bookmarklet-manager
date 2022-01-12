@@ -1,5 +1,5 @@
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { styled } from './styled';
+import { styled } from '../styled';
 
 const StyledScrollArea = styled(ScrollArea.Root, {
   height: '100%',

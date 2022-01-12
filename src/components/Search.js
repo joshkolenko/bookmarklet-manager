@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { bookmarklets } from '../data/bookmarklets';
-import { TabsHeader } from '../styled/Tabs';
+import { TabsHeader } from '../styled/components/Tabs';
 import Bookmarklets from './Bookmarklets';
 
 export default function Search({ favorites, handleFavorite }) {

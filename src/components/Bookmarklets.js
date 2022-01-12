@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollAreaRoot } from '../styled/ScrollArea';
-import { styled } from '../styled/styled';
+import { ScrollAreaRoot } from '../styled/components/ScrollArea';
 import Bookmarklet from './Bookmarklet';
 
 export default function Bookmarklets({
@@ -20,16 +19,12 @@ export default function Bookmarklets({
     />
   ));
 
-  const StyledMessage = styled('span', {
-    fontSize: '$2',
-  });
-
   return (
     <ScrollAreaRoot>
       {renderedBookmarklets.length ? (
         renderedBookmarklets
       ) : (
-        <StyledMessage>{message}</StyledMessage>
+        <span>{message}</span>
       )}
     </ScrollAreaRoot>
   );

@@ -5,7 +5,7 @@ export const bookmarklets = [
     type: 'toggle',
     script: () => {
       if (!document.getElementById('MetabdMjYiaagYS0saaac9wbF0Nivp')) {
-        console.log('Field elements not found');
+        console.error('Field elements not found');
         return;
       }
       overlayId = 'bg-overlay';
@@ -499,7 +499,11 @@ export const bookmarklets = [
     name: 'Get category ID',
     type: 'button',
     script: () => {
-      alert(dataLayer[2].product_category_id);
+      try {
+        alert(dataLayer[2].product_category_id);
+      } catch {
+        console.error('Could not find dataLayer');
+      }
     },
   },
   {
@@ -507,12 +511,16 @@ export const bookmarklets = [
     name: 'Copy category ID',
     type: 'button',
     script: () => {
-      $pci = findInDataLayer('product_category_id');
-      $temp = $('<input>');
-      $('body').append($temp);
-      $temp.val($pci === '' ? 'UNDEFINED' : $pci).select();
-      document.execCommand('copy');
-      $temp.remove();
+      try {
+        $pci = findInDataLayer('product_category_id');
+        $temp = $('<input>');
+        $('body').append($temp);
+        $temp.val($pci === '' ? 'UNDEFINED' : $pci).select();
+        document.execCommand('copy');
+        $temp.remove();
+      } catch {
+        console.error('Could not find dataLayer');
+      }
     },
   },
   {
@@ -554,6 +562,8 @@ export const bookmarklets = [
     id: 5,
     name: 'Clear dwsid',
     type: 'button',
-    script: () => {},
+    script: () => {
+      document.cookie = 'dwsid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+    },
   },
 ];
