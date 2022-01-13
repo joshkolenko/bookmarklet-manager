@@ -8,6 +8,7 @@ export const globalStyles = globalCss({
     bottom: 0,
     left: 0,
     zIndex: 10000,
+    pointerEvents: 'none',
   },
 
   '#fed-toolkit *:not(.fas)': {

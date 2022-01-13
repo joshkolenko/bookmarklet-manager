@@ -1,19 +1,19 @@
-import * as ScrollArea from '@radix-ui/react-scroll-area';
+import * as RadixScrollArea from '@radix-ui/react-scroll-area';
 import { styled } from '../styled';
 
-const StyledScrollArea = styled(ScrollArea.Root, {
+const StyledScrollArea = styled(RadixScrollArea.Root, {
   height: '100%',
   overflow: 'hidden',
 });
-const StyledScrollAreaViewport = styled(ScrollArea.Viewport, {
+const StyledScrollAreaViewport = styled(RadixScrollArea.Viewport, {
   height: '100%',
   padding: '$2 $2 $5',
 });
-const StyledScrollAreaScrollbar = styled(ScrollArea.Scrollbar, {});
-const StyledScrollAreaThumb = styled(ScrollArea.Thumb, {});
-const StyledScrollAreaCorner = styled(ScrollArea.Corner, {});
+const StyledScrollAreaScrollbar = styled(RadixScrollArea.Scrollbar, {});
+const StyledScrollAreaThumb = styled(RadixScrollArea.Thumb, {});
+const StyledScrollAreaCorner = styled(RadixScrollArea.Corner, {});
 
-export function ScrollAreaRoot({ children }) {
+export default function ScrollArea({ children }) {
   return (
     <StyledScrollArea>
       <StyledScrollAreaViewport>{children}</StyledScrollAreaViewport>

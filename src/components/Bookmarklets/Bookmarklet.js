@@ -4,7 +4,7 @@ import {
   BookmarkletIconButton,
   BookmarkletPlayButton,
   BookmarkletSwitch,
-} from '../../styled/components/BookmarkletManager/Bookmarklet';
+} from '../../styled/components/Bookmarklet';
 
 export default function Bookmarklet({
   name,
