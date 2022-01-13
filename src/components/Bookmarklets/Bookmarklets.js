@@ -71,7 +71,7 @@ export default function BookmarkletManager() {
   };
 
   return (
-    <Tabs defaultValue="favorites">
+    <Tabs defaultValue="search">
       <TabsList>
         <TabsTrigger value="favorites">Favorites</TabsTrigger>
         <TabsTrigger value="all">All</TabsTrigger>

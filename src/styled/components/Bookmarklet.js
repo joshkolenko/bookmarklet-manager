@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as Switch from '@radix-ui/react-switch';
+import * as RadixSwitch from '@radix-ui/react-switch';
 import { styled } from '../styled';
 
 const StyledBookmarklet = styled('div', {});
@@ -8,22 +8,22 @@ const StyledBookmarkletIconButton = styled('button', {});
 
 const StyledBookmarkletPlayButton = styled('button', {});
 
-const StyledSwitchRoot = styled(Switch.Root, {});
+const StyledSwitch = styled(RadixSwitch.Root, {});
 
-const StyledSwitchThumb = styled(Switch.Thumb, {});
+const StyledSwitchThumb = styled(RadixSwitch.Thumb, {});
 
 export function BookmarkletSwitch({ script }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <StyledSwitchRoot
+    <StyledSwitch
       checked={isActive}
       onCheckedChange={() => {
         setIsActive(!isActive);
         script();
       }}>
       <StyledSwitchThumb />
-    </StyledSwitchRoot>
+    </StyledSwitch>
   );
 }
 

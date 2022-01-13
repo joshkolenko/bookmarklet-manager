@@ -12,6 +12,10 @@ fontAwesome.integrity =
   'sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p';
 fontAwesome.crossOrigin = 'anonymous';
 
-document.body.append(fontAwesome, fedToolkit);
+const adobeFonts = document.createElement('link');
+adobeFonts.rel = 'stylesheet';
+adobeFonts.href = 'https://use.typekit.net/pws2bwd.css';
+
+document.body.append(fontAwesome, adobeFonts, fedToolkit);
 
 ReactDOM.render(<App />, document.querySelector('#fed-toolkit'));

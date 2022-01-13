@@ -11,8 +11,11 @@ export const globalStyles = globalCss({
     pointerEvents: 'none',
   },
 
-  '#fed-toolkit *:not(.fas)': {
-    fontFamily: '$lato',
+  '#fed-toolkit *': {
     boxSizing: 'border-box',
+  },
+
+  '#fed-toolkit button': {
+    cursor: 'pointer',
   },
 });

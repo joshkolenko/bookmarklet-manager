@@ -1,20 +1,35 @@
 import React from 'react';
-import { MenuRoot } from '../styled/components/Menu/Menu';
+
+import Bookmarklets from './Bookmarklets/Bookmarklets';
+import Tools from './Tools/Tools';
 
 import {
   MenuTabs,
   MenuTabsContent,
   MenuTabsList,
   MenuTabsTrigger,
-} from '../styled/components/Menu/MenuTabs';
+} from '../styled/components/MenuTabs';
 
-import Bookmarklets from './Bookmarklets/Bookmarklets';
-import Tools from './Tools/Tools';
+import { styled, darkTheme } from '../styled/styled';
+
+const StyledMenu = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  pointerEvents: 'auto',
+  position: 'absolute',
+  top: 20,
+  right: -0,
+  bottom: 0,
+  width: 400,
+  filter: 'drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.2))',
+});
 
 export default function Menu() {
+  const useDark = false;
+
   return (
-    <MenuRoot>
-      <MenuTabs defaultValue="tools">
+    <StyledMenu className={useDark ? darkTheme : null}>
+      <MenuTabs defaultValue="bookmarklets">
         <MenuTabsList>
           <MenuTabsTrigger value="bookmarklets">
             <i className="fas fa-bookmark" />
@@ -30,6 +45,6 @@ export default function Menu() {
           <Tools />
         </MenuTabsContent>
       </MenuTabs>
-    </MenuRoot>
+    </StyledMenu>
   );
 }
