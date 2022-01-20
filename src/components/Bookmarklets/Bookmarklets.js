@@ -10,13 +10,17 @@ import {
   TabsContent,
   TabsHeader,
 } from '../../styled/components/Tabs';
+import Field from '../../styled/components/Field';
 
 export default function BookmarkletManager() {
   const storage = window.localStorage;
 
   const getFavorites = () => {
     if (storage.getItem('bookmarklet-favorites')) {
-      return storage.getItem('bookmarklet-favorites').split(',');
+      return storage
+        .getItem('bookmarklet-favorites')
+        .split(',')
+        .map((f) => parseInt(f));
     }
 
     return [];
@@ -24,13 +28,11 @@ export default function BookmarkletManager() {
 
   const [favorites, setFavorites] = useState(getFavorites());
 
-  const handleFavorite = (name, isFav) => {
-    const newFavorites = isFav
-      ? favorites.filter((f) => f !== name)
-      : [...favorites, name];
-
+  const handleFavorite = (id, isFavorite) => {
+    const newFavorites = isFavorite
+      ? favorites.filter((fid) => fid !== id)
+      : [...favorites, id];
     storage.setItem('bookmarklet-favorites', newFavorites);
-
     setFavorites(getFavorites());
   };
 
@@ -41,27 +43,30 @@ export default function BookmarkletManager() {
   const [searchMessage, setSearchMessage] = useState(initialSearchMessage);
 
   useEffect(() => {
-    const getSearchResults = () => {
-      const regexp = new RegExp(`(^|)(${searchTerm})(|$)`, 'i');
+    if (searchTerm) {
+      const getSearchResults = () => {
+        const regexp = new RegExp(`(^|)(${searchTerm})(|$)`, 'i');
 
-      if (searchTerm) return bookmarklets.filter((bm) => bm.name.match(regexp));
-      return [];
-    };
+        if (searchTerm)
+          return bookmarklets.filter((bm) => bm.name.match(regexp));
+        return [];
+      };
+
+      setSearchResults(getSearchResults());
+    } else {
+      setSearchResults([]);
+    }
 
     setSearchMessage(searchTerm ? 'No results' : initialSearchMessage);
-
-    setSearchResults(getSearchResults());
   }, [searchTerm]);
 
   const getRenderedBookmarklets = (bookmarklets, message) => {
     if (bookmarklets.length) {
       return bookmarklets.map((bm) => (
         <Bookmarklet
-          key={bm.name}
-          name={bm.name}
-          type={bm.type}
-          script={bm.script}
-          isFav={favorites.find((f) => f === bm.name)}
+          key={bm.id}
+          bookmarklet={bm}
+          isFavorite={favorites.find((fid) => fid === bm.id)}
           handleFavorite={handleFavorite}
         />
       ));
@@ -70,8 +75,12 @@ export default function BookmarkletManager() {
     }
   };
 
+  const handleSearchTermChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
-    <Tabs defaultValue="search">
+    <Tabs className="tabs" defaultValue="favorites">
       <TabsList>
         <TabsTrigger value="favorites">Favorites</TabsTrigger>
         <TabsTrigger value="all">All</TabsTrigger>
@@ -79,29 +88,26 @@ export default function BookmarkletManager() {
           <i className="fas fa-search" />
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="favorites">
+      <TabsContent className="tabs-content" value="favorites">
         <TabsHeader>Favorited bookmarklets</TabsHeader>
         <ScrollArea>
           {getRenderedBookmarklets(
-            bookmarklets.filter((bm) => favorites.find((f) => f === bm.name)),
+            bookmarklets.filter((bm) => favorites.find((fid) => fid === bm.id)),
             'No favorited bookmarklets'
           )}
         </ScrollArea>
       </TabsContent>
-      <TabsContent value="all">
+      <TabsContent className="tabs-content" value="all">
         <TabsHeader>All bookmarklets</TabsHeader>
         <ScrollArea>
           {getRenderedBookmarklets(bookmarklets, 'No bookmarklets found')}
         </ScrollArea>
       </TabsContent>
-      <TabsContent value="search">
+      <TabsContent className="tabs-content" value="search">
         <TabsHeader>
-          Search bookmarklets
-          <input
-            type="text"
-            onInput={(e) => setSearchTerm(e.target.value)}
-            value={searchTerm}
-          />
+          <Field handleChange={handleSearchTermChange} value={searchTerm}>
+            Search Bookmarklets
+          </Field>
         </TabsHeader>
         <ScrollArea>
           {getRenderedBookmarklets(searchResults, searchMessage)}
