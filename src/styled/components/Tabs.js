@@ -1,63 +1,54 @@
 import * as RadixTabs from '@radix-ui/react-tabs';
 import { styled } from '../styled';
 
-const StyledTabs = styled(RadixTabs.Root, {
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-});
+const StyledTabs = styled(RadixTabs.Root, {});
 
 const StyledTabsList = styled(RadixTabs.List, {
   display: 'flex',
-  padding: '$4',
+  padding: '0 $6',
 });
 
 const StyledTabsTrigger = styled(RadixTabs.Trigger, {
   all: 'unset',
   display: 'flex',
   justifyContent: 'center',
+  color: '$text',
   alignItems: 'center',
   flex: 1,
   height: 60,
   fontFamily: '$title',
-  fontSize: '$3',
+  fontSize: '$2',
   fontWeight: '$4',
-  borderRadius: '5px',
+  borderRadius: '15px',
+  letterSpacing: 0.2,
+  marginRight: '$2',
+
+  '&:last-of-type': { marginRight: 0 },
 
   '&.icon-tab': { fontSize: '$4', maxWidth: 60 },
 
+  '&:hover': { background: '$hover' },
+
   '&[data-state="active"]': {
-    background: '$text',
-    color: '$background',
+    background: '$primary',
+    color: '$onPrimary',
   },
 });
 
 const StyledTabsContent = styled(RadixTabs.Content, {
-  '&[data-state="active"]': {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
+  color: '$text',
+  padding: '0 $6',
 });
 
 const StyledTabsHeader = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  padding: '$3 0 $4',
-  margin: '0 $4 0',
   fontFamily: '$title',
-  fontSize: '$3',
+  fontSize: '$1',
   fontWeight: '$4',
-  borderBottom: '3px solid $surface',
-
-  input: {
-    all: 'unset',
-    background: '$surface',
-    marginTop: '$2',
-    fontSize: '$2',
-    padding: '$2 $3',
-    borderRadius: '5px',
-  },
+  color: '$text',
+  padding: '$5 0 $2',
+  textTransform: 'uppercase',
 });
 
 export const Tabs = StyledTabs;

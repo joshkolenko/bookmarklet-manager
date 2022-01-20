@@ -1,17 +1,12 @@
 import * as RadixTabs from '@radix-ui/react-tabs';
 import { styled } from '../styled';
 
-const StyledMenuTabs = styled(RadixTabs.Root, {
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-});
+const StyledMenuTabs = styled(RadixTabs.Root, {});
 
 const StyledMenuTabsList = styled(RadixTabs.List, {
-  background: '$background',
   display: 'flex',
-  alignSelf: 'start',
-  borderRadius: '16px 16px 0 0',
+  alignItems: 'center',
+  padding: '$6 $6 0',
 });
 
 const StyledMenuTabsTrigger = styled(RadixTabs.Trigger, {
@@ -20,29 +15,34 @@ const StyledMenuTabsTrigger = styled(RadixTabs.Trigger, {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '$4',
-  width: 70,
-  height: 50,
-  borderRadius: '10px',
+  width: 60,
+  height: 60,
+  background: '$background',
+  color: '$text',
+  marginRight: '$2',
+  borderRadius: '15px',
 
-  '&:first-of-type': { borderRadius: '10px 0 0 0' },
-  '&:last-of-type': { borderRadius: '0 10px 0 0' },
+  '&:last-of-type': { marginRight: 0 },
+
+  '&.icon-tab': { fontSize: '$4', maxWidth: 60 },
+
+  '&:hover': { background: '$hover' },
 
   '&[data-state="active"]': {
-    background: '$text',
-    color: '$background',
+    background: '$primary',
+    color: '$onPrimary',
   },
 });
 
-const StyledMenuTabsContent = styled(RadixTabs.Content, {
-  '&[data-state="active"]': {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    background: '$background',
-  },
-});
+const StyledMenuTabsContent = styled(RadixTabs.Content, {});
 
-const StyledMenuTabsHeader = styled('div', {});
+const StyledMenuTabsHeader = styled('div', {
+  color: '$title',
+  fontFamily: '$title',
+  fontWeight: '$4',
+  fontSize: '$6',
+  padding: '$7 $6 $5',
+});
 
 export const MenuTabs = StyledMenuTabs;
 export const MenuTabsList = StyledMenuTabsList;
