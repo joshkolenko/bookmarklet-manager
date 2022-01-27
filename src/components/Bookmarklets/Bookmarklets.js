@@ -15,6 +15,8 @@ import Field from '../../styled/components/Field';
 export default function BookmarkletManager() {
   const storage = window.localStorage;
 
+  getBookmarklets();
+
   const getFavorites = () => {
     if (storage.getItem('bookmarklet-favorites')) {
       return storage
@@ -43,21 +45,17 @@ export default function BookmarkletManager() {
   const [searchMessage, setSearchMessage] = useState(initialSearchMessage);
 
   useEffect(() => {
-    if (searchTerm) {
-      const getSearchResults = () => {
-        const regexp = new RegExp(`(^|)(${searchTerm})(|$)`, 'i');
+    const getSearchResults = () => {
+      const regexp = new RegExp(`(^|)(${searchTerm})(|$)`, 'i');
 
-        if (searchTerm)
-          return bookmarklets.filter((bm) => bm.name.match(regexp));
-        return [];
-      };
+      if (searchTerm) return bookmarklets.filter((bm) => bm.name.match(regexp));
+      return [];
+    };
 
+    if (searchResults.length !== getSearchResults().length) {
       setSearchResults(getSearchResults());
-    } else {
-      setSearchResults([]);
+      setSearchMessage(searchTerm ? 'No results' : initialSearchMessage);
     }
-
-    setSearchMessage(searchTerm ? 'No results' : initialSearchMessage);
   }, [searchTerm]);
 
   const getRenderedBookmarklets = (bookmarklets, message) => {
