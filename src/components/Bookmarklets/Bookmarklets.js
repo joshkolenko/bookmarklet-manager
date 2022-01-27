@@ -15,8 +15,6 @@ import Field from '../../styled/components/Field';
 export default function BookmarkletManager() {
   const storage = window.localStorage;
 
-  getBookmarklets();
-
   const getFavorites = () => {
     if (storage.getItem('bookmarklet-favorites')) {
       return storage

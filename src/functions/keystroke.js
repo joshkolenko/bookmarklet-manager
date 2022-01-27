@@ -1,3 +1,5 @@
+import { bookmarklets } from '../data/bookmarklets';
+
 export const getKeystroke = (e) => {
   const ctrl = e.ctrlKey ? 'CTRL' : e.metaKey ? 'CMD' : '';
   const shift = e.shiftKey ? 'SHIFT' : '';
@@ -21,13 +23,17 @@ export const getKeystroke = (e) => {
   }
 };
 
-export const handleKeystroke = async (keystroke) => {
+export const handleKeystroke = async (keystroke, functions) => {
   if (keystroke === 'ALT + SHIFT + B') {
-    return true;
+    functions[0]();
+
+    return;
   }
 
-  const bookmarklets = await getBookmarklets();
-  const userSettings = await getUser();
+  const storage = window.localStorage;
+
+  const settingsJSON = storage.getItem('bookmarklet-settings');
+  const settings = JSON.parse(settingsJSON);
 
   const match = settings.find((s) => s.shortcut === keystroke);
 
@@ -36,7 +42,9 @@ export const handleKeystroke = async (keystroke) => {
       const bookmarklet = bookmarklets.find((b) => b.id === match.id);
       bookmarklet.function();
     } catch {
-      console.error('error');
+      console.error(
+        'Could not run bookmarklet, try running from the UI instead'
+      );
     }
   }
 };
