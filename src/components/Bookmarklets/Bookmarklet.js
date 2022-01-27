@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { getKeystroke, handleKeystroke } from '../../functions/keystroke';
+import React, { useState } from 'react';
 import {
   BookmarkletRoot,
   BookmarkletFavoriteButton,
@@ -74,25 +73,25 @@ export default function Bookmarklet({
 
   const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    const listenerCallback = (e) => {
-      const keystroke = getKeystroke(e);
-      const shortcut = userBookmarklet.shortcut;
-      const type = userBookmarklet.type;
+  // useEffect(() => {
+  //   const listenerCallback = (e) => {
+  //     const keystroke = getKeystroke(e);
+  //     const shortcut = userBookmarklet.shortcut;
+  //     const type = userBookmarklet.type;
 
-      if (keystroke && shortcut) {
-        handleKeystroke(
-          shortcut,
-          keystroke,
-          type === 'toggle' ? toggleBookmarklet : userBookmarklet.function
-        );
-      }
-    };
+  //     if (keystroke && shortcut) {
+  //       handleKeystroke(
+  //         shortcut,
+  //         keystroke,
+  //         type === 'toggle' ? toggleBookmarklet : userBookmarklet.function
+  //       );
+  //     }
+  //   };
 
-    window.addEventListener('keyup', listenerCallback);
+  //   window.addEventListener('keyup', listenerCallback);
 
-    return () => window.removeEventListener('keyup', listenerCallback);
-  }, [isActive, userBookmarklet]);
+  //   return () => window.removeEventListener('keyup', listenerCallback);
+  // }, [isActive, userBookmarklet]);
 
   let renderedAction = <div />;
 
@@ -112,7 +111,7 @@ export default function Bookmarklet({
 
   return (
     <BookmarkletRoot
-      className={isFavorite ? 'favorite' : '' + isActive ? true : false}>
+      className={(isFavorite ? 'favorite' : '') + (isActive ? ' active' : '')}>
       <div className="bookmarklet-header">
         <BookmarkletFavoriteButton
           func={() => handleFavorite(userBookmarklet.id, isFavorite)}
