@@ -6,30 +6,29 @@ import Tools from './Tools/Tools';
 import {
   MenuTabs,
   MenuTabsContent,
+  MenuTabsHeader,
   MenuTabsList,
   MenuTabsTrigger,
 } from '../styled/components/MenuTabs';
 
-import { styled, darkTheme } from '../styled/styled';
+import { styled } from '../styled/styled';
 
 const StyledMenu = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
   pointerEvents: 'auto',
   position: 'absolute',
-  top: 20,
+  top: 0,
   right: -0,
   bottom: 0,
-  width: 400,
+  width: 480,
+  height: '100vh',
+  background: '$background',
   filter: 'drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.2))',
 });
 
 export default function Menu() {
-  const useDark = false;
-
   return (
-    <StyledMenu className={useDark ? darkTheme : null}>
-      <MenuTabs defaultValue="bookmarklets">
+    <StyledMenu className="toolkit-menu">
+      <MenuTabs className="menu-tabs" defaultValue="bookmarklets">
         <MenuTabsList>
           <MenuTabsTrigger value="bookmarklets">
             <i className="fas fa-bookmark" />
@@ -38,10 +37,12 @@ export default function Menu() {
             <i className="fas fa-tools" />
           </MenuTabsTrigger>
         </MenuTabsList>
-        <MenuTabsContent value="bookmarklets">
+        <MenuTabsContent className="menu-tabs-content" value="bookmarklets">
+          <MenuTabsHeader>Bookmarklets</MenuTabsHeader>
           <Bookmarklets />
         </MenuTabsContent>
-        <MenuTabsContent value="tools">
+        <MenuTabsContent className="menu-tabs-content" value="tools">
+          <MenuTabsHeader>Tools</MenuTabsHeader>
           <Tools />
         </MenuTabsContent>
       </MenuTabs>
