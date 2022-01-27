@@ -45,7 +45,7 @@ const StyledTabsHeader = styled('div', {
   flexDirection: 'column',
   fontFamily: '$title',
   fontSize: '$1',
-  fontWeight: '$4',
+  fontWeight: '$5',
   color: '$text',
   padding: '$5 0 $2',
   textTransform: 'uppercase',
