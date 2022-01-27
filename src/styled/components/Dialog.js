@@ -47,14 +47,25 @@ const StyledDialogOverlay = styled(RadixDialog.Overlay, {
   zIndex: 10001,
 });
 const StyledDialogTitle = styled(RadixDialog.Title, {
+  all: 'unset',
   color: '$title',
+  fontSize: '$5',
+  fontWeight: '$4',
   fontFamily: '$title',
   margin: '0 0 $3',
 });
 const StyledDialogDescription = styled(RadixDialog.Description, {
   color: '$text',
-  fontFamily: '$title',
+  fontFamily: '$body',
+  fontSize: '$2',
+  fontWeight: '$3',
   margin: 0,
+
+  '& strong': {
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    fontWeight: '$4',
+  },
 });
 const StyledDialogClose = styled(RadixDialog.Close, {
   all: 'unset',
@@ -69,6 +80,7 @@ const StyledDialogClose = styled(RadixDialog.Close, {
   height: 30,
   cursor: 'pointer',
 });
+const StyledDialogCloseChild = styled(RadixDialog.Close, {});
 const StyledDialogContent = styled(RadixDialog.Content, {
   pointerEvents: 'none !important',
   display: 'flex',
@@ -110,7 +122,7 @@ export default function Dialog({
       </StyledDialogTrigger>
       <RadixDialog.Portal>
         <StyledDialogOverlay />
-        <StyledDialogContent>
+        <StyledDialogContent className="toolkit-dialog">
           <Wrapper>
             <StyledDialogTitle>{title}</StyledDialogTitle>
             <StyledDialogDescription>{description}</StyledDialogDescription>
@@ -118,11 +130,11 @@ export default function Dialog({
               <i className="fas fa-times" />
             </StyledDialogClose>
             {children}
-            <StyledDialogClose asChild>
+            <StyledDialogCloseChild asChild>
               <Button css={{ marginLeft: 'auto' }} onClick={handleButtonClick}>
                 {button}
               </Button>
-            </StyledDialogClose>
+            </StyledDialogCloseChild>
           </Wrapper>
         </StyledDialogContent>
       </RadixDialog.Portal>
