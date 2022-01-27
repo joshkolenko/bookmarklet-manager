@@ -41,6 +41,7 @@ const StyledBookmarklet = styled('div', {
       color: '$text',
       fontFamily: '$body',
       fontSize: '$1',
+      fontWeight: '$3',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       width: 270,
