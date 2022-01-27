@@ -11,15 +11,40 @@ export const globalStyles = globalCss({
     pointerEvents: 'none',
   },
 
-  '#fed-toolkit *': {
+  '#fed-toolkit *, .toolkit-dialog *': {
     boxSizing: 'border-box',
+    lineHeight: 'normal !important',
+    letterSpacing: 'normal !important',
+
+    '&:focus': {
+      outline: 'none',
+    },
   },
 
   '#fed-toolkit button': {
     cursor: 'pointer',
   },
 
-  '.menu': {
+  '#fed-toolkit input, .toolkit-dialog input': {
+    all: 'unset',
+    background: '$surface',
+    margin: '$2 0 $4',
+    fontSize: '$3 !important',
+    fontWeight: '$4',
+    fontFamily: '$title',
+    padding: '$2 $3',
+    borderRadius: '5px',
+    color: '$title',
+    cursor: 'text',
+    border: '3px solid transparent !important',
+    textTransform: 'none',
+
+    '&:focus': {
+      border: '3px solid $primary !important',
+    },
+  },
+
+  '.toolkit-menu': {
     '.menu-tabs, .tabs, .scroll-area': {
       height: '100%',
       display: 'flex',
