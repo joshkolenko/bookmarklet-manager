@@ -21,8 +21,22 @@ export const getKeystroke = (e) => {
   }
 };
 
-export const handleKeystroke = (shortcut, keystroke, callback) => {
-  if (shortcut === keystroke && callback) {
-    callback();
+export const handleKeystroke = async (keystroke) => {
+  if (keystroke === 'ALT + SHIFT + B') {
+    return true;
+  }
+
+  const bookmarklets = await getBookmarklets();
+  const userSettings = await getUser();
+
+  const match = settings.find((s) => s.shortcut === keystroke);
+
+  if (match) {
+    try {
+      const bookmarklet = bookmarklets.find((b) => b.id === match.id);
+      bookmarklet.function();
+    } catch {
+      console.error('error');
+    }
   }
 };
