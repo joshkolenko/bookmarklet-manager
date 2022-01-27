@@ -25,7 +25,9 @@ const StyledMenu = styled('div', {
   filter: 'drop-shadow(-3px 3px 10px rgba(0, 0, 0, 0.2))',
 });
 
-export default function Menu() {
+export default function Menu({ show }) {
+  if (!show) return <div></div>;
+
   return (
     <StyledMenu className="toolkit-menu">
       <MenuTabs className="menu-tabs" defaultValue="bookmarklets">
