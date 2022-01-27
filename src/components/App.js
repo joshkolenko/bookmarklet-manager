@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { globalStyles } from '../styled/global';
+import { getKeystroke, handleKeystroke } from '../functions/keystroke';
 import Menu from './Menu';
 
 export default function App() {
@@ -25,6 +26,20 @@ export default function App() {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const listenerCallback = (e) => {
+      const keystroke = getKeystroke(e);
+
+      if (keystroke) {
+        handleKeystroke(keystroke);
+      }
+    };
+
+    window.addEventListener('keyup', listenerCallback);
+
+    return () => window.removeEventListener('keyup', listenerCallback);
   }, []);
 
   globalStyles();
