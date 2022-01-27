@@ -13,6 +13,10 @@ export const Button = styled('button', {
   color: '$onPrimary',
   background: '$primary',
 
+  '&:hover, &:focus': {
+    background: '$primaryD',
+  },
+
   '&.secondary': {
     color: '$primary',
     background: '$primaryA',
